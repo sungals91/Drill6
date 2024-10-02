@@ -42,7 +42,10 @@ while running:
         t = i / 100
         char_x = (1-t) * x + t * random_x
         char_y = (1-t) * y + t * random_y
-        character.clip_draw(frame * 100, 0, 100, 100, char_x, char_y)
+        if x > random_x:
+            character.clip_draw(frame * 100, 0, 100, 100, char_x, char_y)
+        else:
+            character.clip_composite_draw(frame * 100, 0, 100, 100, 0, 'h', char_x, char_y, 100, 100)
         update_canvas()
         handle_events()
         frame = (frame + 1) % 8

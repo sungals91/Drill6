@@ -34,7 +34,7 @@ while running:
     update_canvas()
     handle_events()
 
-    for i in range(0, 100+1, 4):
+    for i in range(0, 100+1, 5):
         clear_canvas()
         background.draw(400, 300)
         arrow.draw(random_x, random_y)
@@ -49,7 +49,7 @@ while running:
         update_canvas()
         handle_events()
         frame = (frame + 1) % 8
-        delay(0.05)
+        delay(0.03)
         x,y = char_x, char_y
 
 close_canvas()

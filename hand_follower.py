@@ -9,6 +9,7 @@ running = True
 x, y = 800//2, 600//2
 background_width, background_height = 800, 600
 arrow_width, arrow_height = 50, 52
+frame = 0
 
 def handle_events():
     global running
@@ -20,18 +21,21 @@ def handle_events():
             if event.key == SDLK_ESCAPE:
                 running = False
 
-def random_arrow_draw():
-    arrow_x = random.randint(arrow_width//2, background_width - arrow_width//2)
-    arrow_y = random.randint(arrow_height//2, background_height - arrow_height//2)
-    arrow.draw(arrow_x,arrow_y)
-    pass
+def random_coordinate():
+    rand_x = random.randint(arrow_width//2, background_width - arrow_width//2)
+    rand_y = random.randint(arrow_height//2, background_height - arrow_height//2)
+    return rand_x, rand_y
 
 while running:
+    random_x, random_y = random_coordinate()
+
     clear_canvas()
     background.draw(x, y)
-    random_arrow_draw()
+    arrow.draw(random_x, random_y)
+    character.clip_draw(frame * 100, 0, 100, 100, x, y)
     update_canvas()
     handle_events()
-    delay(1)
+    frame = (frame + 1) % 8
+    delay(0.05)
 
 close_canvas()

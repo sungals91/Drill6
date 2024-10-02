@@ -27,15 +27,26 @@ def random_coordinate():
     return rand_x, rand_y
 
 while running:
-    random_x, random_y = random_coordinate()
-
     clear_canvas()
-    background.draw(x, y)
+    background.draw(400, 300)
+    random_x, random_y = random_coordinate()
     arrow.draw(random_x, random_y)
-    character.clip_draw(frame * 100, 0, 100, 100, x, y)
     update_canvas()
     handle_events()
-    frame = (frame + 1) % 8
-    delay(0.05)
+
+    for i in range(0, 100+1, 4):
+        clear_canvas()
+        background.draw(400, 300)
+        arrow.draw(random_x, random_y)
+
+        t = i / 100
+        char_x = (1-t) * x + t * random_x
+        char_y = (1-t) * y + t * random_y
+        character.clip_draw(frame * 100, 0, 100, 100, char_x, char_y)
+        update_canvas()
+        handle_events()
+        frame = (frame + 1) % 8
+        delay(0.05)
+        x,y = char_x, char_y
 
 close_canvas()
